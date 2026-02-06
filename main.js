@@ -1,27 +1,22 @@
-const PASSWORD = "12345";
-let unlocked = false;
+const container = document.getElementById("cards");
 
-document.querySelectorAll(".lock-overlay").forEach(lock => {
-  lock.addEventListener("click", () => {
-    if (unlocked) return;
+TEXTS.forEach(item => {
+  const card = document.createElement("div");
+  card.className = "card";
 
-    const pass = prompt(
-      "🔒 محتوى مدفوع\nللحصول على كلمة السر اشترك\nTelegram: @mortza016"
-    );
+  if (item.type === "paid") {
+    card.classList.add("locked");
+    card.innerHTML = `
+      <div class="lock-overlay">🔒 محتوى مدفوع</div>
+      <p class="text">${item.text}</p>
+      <button class="copy-btn" disabled>نسخ النص</button>
+    `;
+  } else {
+    card.innerHTML = `
+      <p class="text">${item.text}</p>
+      <button class="copy-btn">نسخ النص</button>
+    `;
+  }
 
-    if (pass === PASSWORD) {
-      unlocked = true;
-      document.querySelectorAll(".card").forEach(card => {
-        card.classList.add("unlocked");
-
-        const btn = card.querySelector(".copy-btn");
-        const text = card.querySelector(".text").innerText;
-
-        btn.disabled = false;
-        btn.onclick = () => navigator.clipboard.writeText(text);
-      });
-    } else {
-      alert("❌ كلمة السر غير صحيحة");
-    }
-  });
+  container.appendChild(card);
 });
