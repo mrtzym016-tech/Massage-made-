@@ -2,66 +2,47 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>نصوص وسكربتات جاهزة</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- خط -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
+  <title>Copy Tools – نصوص جاهزة</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- ===== Header ===== -->
-<header class="hero">
-  <h1>انسخ النص… واستخدمه فورًا</h1>
-  <p>
-    نصوص وسكربتات بشرية جاهزة للبيع وصناعة المحتوى  
-    <br>بدون تفكير • بدون تعب • بدون حشو
-  </p>
-
-  <a href="#cards" class="hero-btn">🔥 تصفح النصوص الآن</a>
+<header class="top">
+  <h1>📋 Copy Tools</h1>
+  <p>نصوص جاهزة تُستخدم فورًا — بدون تفكير</p>
 </header>
 
-<!-- ===== Info Bar ===== -->
-<section class="info">
-  <div>✔ نصوص بشرية 100%</div>
-  <div>✔ مناسبة للسوق العربي</div>
-  <div>✔ جاهزة للنسخ والاستخدام</div>
-</section>
-
-<!-- ===== Cards Section ===== -->
 <main class="container">
 
-  <h2 class="section-title">📋 النصوص الجاهزة</h2>
-
-  <!-- ملاحظة المدفوع -->
-  <div class="paid-note">
-    🔒 بعض النصوص احترافية ومقفولة  
-    <br>
-    للاشتراك والحصول على كلمة السر:
-    <a href="https://t.me/mortza016" target="_blank">@mortza016</a>
+  <div class="controls">
+    <label>اختر نوع النص</label>
+    <select id="category" onchange="renderCategory()">
+      <option value="whatsapp">💬 رسائل واتساب بيع</option>
+      <option value="reply">📩 ردود عملاء</option>
+      <option value="video">🎬 سكربتات فيديو</option>
+    </select>
   </div>
 
-  <!-- هنا يتم توليد البطاقات -->
-  <div id="cards" class="cards-grid"></div>
+  <!-- قسم النصوص المدفوعة -->
+  <div id="lockedInfo" class="locked-info">
+    🔐 هذه النصوص مدفوعة  
+    <br>اشترك للحصول على كلمة السر  
+    <br>📩 تيليجرام: <a href="https://t.me/USERNAME" target="_blank">@USERNAME</a>
+  </div>
+
+  <input type="password" id="passwordInput" placeholder="أدخل كلمة السر">
+  <button onclick="unlock()">فتح النصوص المدفوعة</button>
+
+  <!-- عرض البطاقات -->
+  <section id="content" class="grid"></section>
 
 </main>
 
-<!-- ===== Footer ===== -->
 <footer class="footer">
-  <p>
-    © 2026 — نصوص جاهزة للاستخدام  
-    <br>
-    صُمم لمن يريد نتيجة حقيقية
-  </p>
+  <p>© 2026 — نصوص بشرية جاهزة | صنع لمَن يريد نتيجة</p>
 </footer>
 
-<!-- ===== Scripts ===== -->
 <script src="data.js"></script>
 <script src="main.js"></script>
-
 </body>
 </html>
