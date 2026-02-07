@@ -16,24 +16,13 @@
 
   <div class="controls">
     <label>اختر نوع النص</label>
-    <select id="category" onchange="renderCategory()">
+    <select id="category" onchange="render()">
       <option value="whatsapp">💬 رسائل واتساب بيع</option>
       <option value="reply">📩 ردود عملاء</option>
       <option value="video">🎬 سكربتات فيديو</option>
     </select>
   </div>
 
-  <!-- قسم النصوص المدفوعة -->
-  <div id="lockedInfo" class="locked-info">
-    🔐 هذه النصوص مدفوعة  
-    <br>اشترك للحصول على كلمة السر  
-    <br>📩 تيليجرام: <a href="https://t.me/USERNAME" target="_blank">@USERNAME</a>
-  </div>
-
-  <input type="password" id="passwordInput" placeholder="أدخل كلمة السر">
-  <button onclick="unlock()">فتح النصوص المدفوعة</button>
-
-  <!-- عرض البطاقات -->
   <section id="content" class="grid"></section>
 
 </main>
@@ -43,6 +32,32 @@
 </footer>
 
 <script src="data.js"></script>
-<script src="main.js"></script>
+<script>
+function render() {
+  const cat = document.getElementById("category").value;
+  const box = document.getElementById("content");
+  box.innerHTML = "";
+
+  data[cat].forEach(text => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <pre>${text}</pre>
+      <button onclick="copy(this)">نسخ النص</button>
+    `;
+    box.appendChild(div);
+  });
+}
+
+function copy(btn) {
+  const text = btn.previousElementSibling.innerText;
+  navigator.clipboard.writeText(text);
+  btn.innerText = "✔ تم النسخ";
+  setTimeout(() => btn.innerText = "نسخ النص", 2000);
+}
+
+render();
+</script>
+
 </body>
 </html>
